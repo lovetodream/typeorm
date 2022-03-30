@@ -14,7 +14,7 @@ import {
   DataSource,
   DataSourceOptions,
   createConnection,
-  getConnectionManager,
+  getConnectionManager, MixedList,
 } from 'typeorm';
 import {
   generateString,
@@ -201,7 +201,7 @@ export class TypeOrmCoreModule implements OnApplicationShutdown {
           return createTypeormConnection(options as DataSourceOptions);
         }
 
-        let entities = options.entities;
+        let entities = options.entities as MixedList<any>;
         if (entities) {
           entities = entities.concat(
             EntitiesMetadataStorage.getEntitiesByConnection(connectionToken),
